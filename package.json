@@ -1,0 +1,41 @@
+{
+  "name": "svelte-blockfrost",
+  "version": "0.1.0",
+  "description": "Newtypes for common binary types, and associated conversion functions",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc && tsc-alias",
+    "prepare": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Karakatiza666/svelte-blockfrost.git"
+  },
+  "keywords": [
+    "typescript",
+    "hex",
+    "base64",
+    "cbor"
+  ],
+  "author": "Karakatiza666",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Karakatiza666/svelte-blockfrost/issues"
+  },
+  "homepage": "https://github.com/Karakatiza666/svelte-blockfrost#readme",
+  "dependencies": {
+    "@blockfrost/blockfrost-js": "^5.2.0",
+    "@stricahq/typhonjs": "^1.2.8",
+    "@sveltejs/kit": "^1.14.0",
+    "byte-base64": "^1.1.0",
+    "svelte-server-proxy": "github:Karakatiza666/svelte-server-proxy",
+    "ts-practical-fp": "github:Karakatiza666/ts-practical-fp",
+    "typescript": "^4.9.5"
+  },
+  "devDependencies": {
+    "ajv": "^8.12.0",
+    "tsc-alias": "^1.8.2"
+  }
+}
