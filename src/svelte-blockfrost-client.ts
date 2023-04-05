@@ -1,7 +1,9 @@
 import type { BlockFrostAPI } from '@blockfrost/blockfrost-js'
+import { paginateMethod } from '@blockfrost/blockfrost-js/lib/utils/index.js'
 import type { NetworkId } from '@stricahq/typhonjs/dist/types.js'
 import { fromBase64, fromHex, isBase64, isHex, makeHex, toHex, type Hex } from 'ts-binary-newtypes'
 import { mapObj, mapObj_, nonNull } from 'ts-practical-fp'
+import { components } from '@blockfrost/openapi';
 
 const typhonNetworks = {
    'mainnet': 1,
@@ -32,6 +34,10 @@ export const makeBlockfrostApiClient = (endpoint: string, networkId: NetworkId):
    return {
       addressesUtxos: (addr, pagination) => req(`/addresses/${addr}/utxos`, pagination),
       addressesUtxosAsset: (addr, asset, pagination) => req(`/addresses/${addr}/utxos/${asset}`, pagination),
+      assetsHistory: (asset, pagination) =>
+         req(`/assets/${asset}/history`, pagination),
+      assetsHistoryAll: (asset, allMethodOptions = {batchSize: 100, order: 'asc'}) =>
+         paginateMethod(pagination => req(`/assets/${asset}/history`, pagination) as any, allMethodOptions),
       blocksLatest: () => req(`/blocks/latest`),
       ...(() => {
          const epochsParameters = (epoch?: number) => req(`/epochs/${epoch ?? 'latest'}/parameters`)
@@ -41,6 +47,9 @@ export const makeBlockfrostApiClient = (endpoint: string, networkId: NetworkId):
          }
       })(),
       scriptsDatum: (datumHash: string) => req(`/scripts/datum/${datumHash}`),
+      txsMetadata(hash) {
+         
+      },
       txSubmit: (transaction: string | Uint8Array) => req(`/tx/submit`, {}, {
          method: 'POST',
          headers: { "Content-Type": "application/cbor" },
