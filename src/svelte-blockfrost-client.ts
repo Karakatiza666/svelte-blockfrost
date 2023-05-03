@@ -47,9 +47,7 @@ export const makeBlockfrostApiClient = (endpoint: string, networkId: NetworkId):
          }
       })(),
       scriptsDatum: (datumHash: string) => req(`/scripts/datum/${datumHash}`),
-      txsMetadata(hash) {
-         
-      },
+      txsMetadata: (hash) => req(`/txs/${hash}/metadata`),
       txSubmit: (transaction: string | Uint8Array) => req(`/tx/submit`, {}, {
          method: 'POST',
          headers: { "Content-Type": "application/cbor" },
